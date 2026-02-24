@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Ticket HugMe – ReclameAQUI</title>
+  <style>
+    :root {
+      --ra-lime: #8CC63F;
+      --ra-forest: #00703C;
+      --ra-forest-dark: #004d2a;
+      --bg: #f8faf8;
+      --card: #fff;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --border: #e0e8e0;
+      --code-bg: #f0f5ee;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--ra-forest) 0%, var(--ra-forest-dark) 100%);
+      color: #fff;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 112, 60, 0.2);
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo .r { color: var(--ra-lime); }
+    .logo .a { color: #fff; }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.35rem;
+      font-weight: 600;
+      opacity: 0.95;
+    }
+
+    .header p {
+      margin: 0.25rem 0 0;
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .container { grid-template-columns: 1fr; }
+    }
+
+    nav {
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+      background: var(--card);
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      border-left: 4px solid var(--ra-lime);
+    }
+
+    nav h3 {
+      margin: 0 0 0.75rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ra-forest);
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav li { margin: 0.25rem 0; }
+
+    nav a {
+      display: block;
+      padding: 0.35rem 0.5rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-radius: 4px;
+    }
+
+    nav a:hover {
+      background: var(--code-bg);
+      color: var(--ra-forest);
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .intro {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border-left: 4px solid var(--ra-lime);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    section {
+      background: var(--card);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    section h2 {
+      margin: 0;
+      padding: 1rem 1.25rem;
+      font-size: 1.1rem;
+      background: linear-gradient(90deg, var(--ra-forest) 0%, transparent 100%);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    section h3 {
+      margin: 0;
+      padding: 0.75rem 1.25rem;
+      font-size: 1rem;
+      color: var(--ra-forest);
+      background: var(--code-bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    section h4 {
+      margin: 0;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: #fafafa;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-inner {
+      padding: 1rem 1.25rem;
+    }
+
+    .section-inner p {
+      margin: 0 0 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--ra-forest);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    tr:hover td {
+      background: var(--code-bg);
+    }
+
+    td:first-child {
+      font-family: ui-monospace, monospace;
+      color: var(--ra-forest);
+      font-weight: 500;
+    }
+
+    td:nth-child(2) {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    pre {
+      margin: 0;
+      padding: 1rem 1.25rem;
+      background: #2d2d2d;
+      color: #e0e0e0;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      border-left: 4px solid var(--ra-lime);
+    }
+
+    .hierarchy {
+      background: var(--card);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .hierarchy pre {
+      background: var(--code-bg);
+      color: var(--text);
+      border-left-color: var(--ra-forest);
+    }
+
+    .breadcrumb {
+      padding: 0.5rem 0 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .breadcrumb ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
+    .breadcrumb li { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .breadcrumb li:not(:last-child)::after { content: "›"; color: var(--text-muted); font-weight: 300; }
+    .breadcrumb a { color: var(--ra-forest); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb [aria-current="page"] { color: var(--text); font-weight: 500; }
+    .doc-nav {
+      grid-column: 1 / -1;
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding: 0.75rem 0 1rem; margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .doc-nav a { padding: 0.4rem 0.75rem; border-radius: 6px; color: var(--ra-forest); text-decoration: none; font-weight: 600; }
+    .doc-nav a:hover { background: var(--code-bg); }
+    .doc-nav a.current { background: var(--ra-forest); color: #fff; }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+  <script>window.DOCS_BASE_URL = '';</script>
+</head>
+<body>
+  <header class="header">
+    <div class="logo"><span class="r">R</span><span class="a">A</span></div>
+    <div style="flex:1;">
+      <h1>Documentação da API – Ticket HugMe</h1>
+      <p>ReclameAQUI · Estrutura JSON da resposta da API</p>
+    </div>
+    <a href="index.html" style="color:#fff;text-decoration:none;font-size:0.9rem;white-space:nowrap;">← Home</a>
+  </header>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb" style="grid-column: 1 / -1;">
+      <ol>
+        <li><a href="index.html">Documentação</a></li>
+        <li aria-current="page">Estrutura JSON – Ticket HugMe</li>
+      </ol>
+    </nav>
+    <nav class="doc-nav" aria-label="Menu da documentação" style="grid-column: 1 / -1;">
+      <a href="index.html">Documentação</a>
+      <a href="interface.html">Interface</a>
+      <a href="mapeamento-campos.html">Mapeamento de campos</a>
+      <a href="ticket-response.html" class="current">Estrutura JSON – Ticket HugMe</a>
+    </nav>
+    <nav>
+      <h3>Navegação</h3>
+      <ul>
+        <li><a href="#raiz">1. Raiz</a></li>
+        <li><a href="#data">2. data[] (ticket)</a></li>
+        <li><a href="#data-1">2.1 hugme_status</a></li>
+        <li><a href="#data-2">2.2 ra_status</a></li>
+        <li><a href="#data-6">2.6 company</a></li>
+        <li><a href="#data-9">2.9 moderation</a></li>
+        <li><a href="#data-10">2.10 ra</a></li>
+        <li><a href="#data-11">2.11 customer</a></li>
+        <li><a href="#data-15">2.15 Campos diretos</a></li>
+        <li><a href="#data-16">2.16 historical[]</a></li>
+        <li><a href="#data-17">2.17 interactions[]</a></li>
+        <li><a href="#meta">3. meta</a></li>
+        <li><a href="#resumo">Resumo da hierarquia</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="intro">
+        <p>Documentação gerada a partir da estrutura JSON de resposta da API. Para cada campo: <strong>Nome</strong> · <strong>Tipo de dados</strong> · <strong>Valor (exemplo)</strong>.</p>
+      </div>
+
+      <section id="raiz">
+        <h2>1. Raiz</h2>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>data</td><td>Array (Object)</td><td>Lista de tickets (ver seção 2)</td></tr>
+              <tr><td>meta</td><td>Object</td><td>Metadados da resposta (ver seção 3)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="data">
+        <h2>2. data[] (item do ticket)</h2>
+        <div class="section-inner">
+          <p>Cada elemento do array <code>data</code> representa um ticket.</p>
+        </div>
+
+        <h3 id="data-1">2.1. hugme_status</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>21</td></tr>
+              <tr><td>name</td><td>String</td><td>"Novo"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="data-2">2.2. ra_status</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>5</td></tr>
+              <tr><td>name</td><td>String</td><td>"Não respondido"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.3. favorable_assessment</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>0</td></tr>
+              <tr><td>description</td><td>String</td><td>"Não Solicitado"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.4. information_source</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>1</td></tr>
+              <tr><td>name</td><td>String</td><td>"RA Reclamação"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.5. source</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>1</td></tr>
+              <tr><td>name</td><td>String</td><td>"ReclameAQUI"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="data-6">2.6. company</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>4808</td></tr>
+              <tr><td>name</td><td>String</td><td>"Koala Teste"</td></tr>
+              <tr><td>active</td><td>Boolean</td><td>true</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.7. last_feeling · 2.8. feed_type</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>-1</td></tr>
+              <tr><td>name</td><td>String | null</td><td>null</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="data-9">2.9. moderation</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>user</td><td>Object</td><td>Ver 2.9.1</td></tr>
+              <tr><td>status</td><td>null</td><td>null</td></tr>
+              <tr><td>reason</td><td>null</td><td>null</td></tr>
+              <tr><td>request_date</td><td>null</td><td>null</td></tr>
+              <tr><td>response_date</td><td>null</td><td>null</td></tr>
+            </tbody>
+          </table>
+          <h4>2.9.1. moderation.user</h4>
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>-1</td></tr>
+              <tr><td>name</td><td>String | null</td><td>null</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="data-10">2.10. ra</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>replicas_count</td><td>Number</td><td>0</td></tr>
+              <tr><td>source_id</td><td>Number</td><td>1</td></tr>
+              <tr><td>source_name</td><td>String</td><td>"Site"</td></tr>
+              <tr><td>deactivation_date</td><td>null</td><td>null</td></tr>
+              <tr><td>deactivation_reason</td><td>null</td><td>null</td></tr>
+              <tr><td>internal_process</td><td>Boolean</td><td>true</td></tr>
+              <tr><td>blackfriday</td><td>Boolean</td><td>false</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="data-11">2.11. customer</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>birthday</td><td>Array (String)</td><td>["1987-02-28T00:00:00.000Z"]</td></tr>
+              <tr><td>cpf</td><td>Array (String)</td><td>["35523912824"]</td></tr>
+              <tr><td>rg</td><td>Array (String)</td><td>["418480734"]</td></tr>
+              <tr><td>gender</td><td>Array (String)</td><td>["Masculino"]</td></tr>
+              <tr><td>email</td><td>Array (String)</td><td>["br-fernandes@hotmail.com"]</td></tr>
+              <tr><td>phone_numbers</td><td>Array (String)</td><td>["11975147350", "11975147350"]</td></tr>
+              <tr><td>photo</td><td>Array</td><td>[]</td></tr>
+              <tr><td>id</td><td>Number</td><td>98021990</td></tr>
+              <tr><td>duplicate_id</td><td>Number</td><td>-1</td></tr>
+              <tr><td>name</td><td>String</td><td>"Bruno Rodrigues Fernandes"</td></tr>
+              <tr><td>socialName</td><td>String | null</td><td>null</td></tr>
+              <tr><td>cnpj</td><td>Array</td><td>[]</td></tr>
+              <tr><td>company_name</td><td>String</td><td>"[]"</td></tr>
+              <tr><td>city</td><td>Array (Object)</td><td>Ver 2.11.1</td></tr>
+              <tr><td>state</td><td>Array (Object)</td><td>Ver 2.11.2</td></tr>
+              <tr><td>type</td><td>String</td><td>"Private Person"</td></tr>
+              <tr><td>tags</td><td>Array</td><td>[]</td></tr>
+              <tr><td>pending_tickets_count</td><td>Number</td><td>0</td></tr>
+            </tbody>
+          </table>
+          <h4>2.11.1. customer.city[]</h4>
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>740</td></tr>
+              <tr><td>name</td><td>String</td><td>"Santo André"</td></tr>
+            </tbody>
+          </table>
+          <h4>2.11.2. customer.state[]</h4>
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>26</td></tr>
+              <tr><td>name</td><td>String</td><td>"São Paulo"</td></tr>
+              <tr><td>fs</td><td>String</td><td>"SP"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.12. user · 2.13. account · 2.14. rafone</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>Number</td><td>-1</td></tr>
+              <tr><td>name</td><td>String | null</td><td>null</td></tr>
+              <tr><td>assignment_date / expiration_date / status_id / status_name</td><td>—</td><td>null ou -1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="data-15">2.15. Campos diretos do ticket (raiz de data[])</h3>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>extra_data</td><td>Array</td><td>[]</td></tr>
+              <tr><td>_id</td><td>String</td><td>"6965281a5c558d5794b6e8f3"</td></tr>
+              <tr><td>id</td><td>Number</td><td>94148275</td></tr>
+              <tr><td>source_external_id</td><td>String</td><td>"237406799"</td></tr>
+              <tr><td>can_like</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>commentary</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>creation_date</td><td>String (ISO 8601)</td><td>"2026-01-12T16:56:09.000Z"</td></tr>
+              <tr><td>insertion_date</td><td>String (ISO 8601)</td><td>"2026-01-12T16:57:35.000Z"</td></tr>
+              <tr><td>complaint_title</td><td>String</td><td>"Teste BeeCloud 12-01"</td></tr>
+              <tr><td>filed</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>last_modification_date</td><td>String (ISO 8601)</td><td>"2026-01-12T16:57:36.000Z"</td></tr>
+              <tr><td>closed_date</td><td>null</td><td>null</td></tr>
+              <tr><td>request_moderation</td><td>Boolean</td><td>true</td></tr>
+              <tr><td>request_evaluation</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>frozen</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>complaint_content</td><td>String</td><td>"Teste BeeCloud"</td></tr>
+              <tr><td>ra_reason</td><td>String</td><td>"Outros"</td></tr>
+              <tr><td>ra_feeling</td><td>null</td><td>null</td></tr>
+              <tr><td>complaint_response_content / complaint_response_date</td><td>null</td><td>null</td></tr>
+              <tr><td>interactions_count</td><td>Number</td><td>1</td></tr>
+              <tr><td>interactions_not_readed_count</td><td>Number</td><td>1</td></tr>
+              <tr><td>resolved_issue / back_doing_business</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>consumer_consideration / consumer_consideration_date</td><td>null</td><td>null</td></tr>
+              <tr><td>company_consideration / company_consideration_date</td><td>null</td><td>null</td></tr>
+              <tr><td>private_treatment_time / public_treatment_time / rating_time</td><td>null</td><td>null</td></tr>
+              <tr><td>rating</td><td>String</td><td>"-1"</td></tr>
+              <tr><td>rating_date</td><td>null</td><td>null</td></tr>
+              <tr><td>comments_count</td><td>Number</td><td>0</td></tr>
+              <tr><td>redistributions_count</td><td>Number</td><td>0</td></tr>
+              <tr><td>redistributions_reason</td><td>null</td><td>null</td></tr>
+              <tr><td>ticket_moderations_count / ticket_messages_count</td><td>Number</td><td>0</td></tr>
+              <tr><td>last_replica_date / contact_us</td><td>null</td><td>null</td></tr>
+              <tr><td>rating_without_response</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>hugme_ticket_type</td><td>null</td><td>null</td></tr>
+              <tr><td>customer_interactions_count</td><td>Number</td><td>1</td></tr>
+              <tr><td>company_interactions_count</td><td>Number</td><td>0</td></tr>
+              <tr><td>assignment_count</td><td>Number</td><td>0</td></tr>
+              <tr><td>rule_id</td><td>Number</td><td>11698</td></tr>
+              <tr><td>duplicate_ticket / tags / sticky_notes / autos</td><td>Array</td><td>[]</td></tr>
+              <tr><td>personalized_fields / attached / categories</td><td>Array</td><td>[]</td></tr>
+              <tr><td>active</td><td>Boolean</td><td>true</td></tr>
+              <tr><td>whatsapp</td><td>null</td><td>null</td></tr>
+              <tr><td>duplicate_tiqt</td><td>Array</td><td>[]</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="data-16">2.16. historical[]</h3>
+        <div class="section-inner">
+          <p>Cada elemento do array <code>historical</code>:</p>
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>user</td><td>Object</td><td>id, name, email (Number / null)</td></tr>
+              <tr><td>auto</td><td>Object</td><td>id, name (Number / null)</td></tr>
+              <tr><td>id</td><td>Number</td><td>1186284702 (ex.)</td></tr>
+              <tr><td>creation_date</td><td>String (ISO 8601)</td><td>"2026-01-12T16:57:35.000Z"</td></tr>
+              <tr><td>type</td><td>Object</td><td>id (Number), name ("INTERACAO" | "CRIACAO")</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="data-17">2.17. interactions[]</h3>
+        <div class="section-inner">
+          <p>Cada elemento do array <code>interactions</code>:</p>
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>ticket_interaction_id</td><td>String</td><td>"397780181"</td></tr>
+              <tr><td>ticket_interaction_type_id</td><td>Number</td><td>1</td></tr>
+              <tr><td>ticket_interaction_name</td><td>String</td><td>"Manifestação"</td></tr>
+              <tr><td>customer_id</td><td>String</td><td>"98021990"</td></tr>
+              <tr><td>responsible_id</td><td>String</td><td>""</td></tr>
+              <tr><td>responsible_name</td><td>String | null</td><td>null</td></tr>
+              <tr><td>message</td><td>String</td><td>"Teste BeeCloud"</td></tr>
+              <tr><td>privacy</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>creation_date</td><td>String (ISO 8601)</td><td>"2026-01-12T16:56:09.000Z"</td></tr>
+              <tr><td>modification_date</td><td>null</td><td>null</td></tr>
+              <tr><td>delivered</td><td>Boolean</td><td>true</td></tr>
+              <tr><td>readed</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>visualized</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>video / picture</td><td>null</td><td>null</td></tr>
+              <tr><td>details</td><td>Array (Object)</td><td>Ver 2.17.1</td></tr>
+            </tbody>
+          </table>
+          <h4>2.17.1. interactions[].details[]</h4>
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>ticket_detail_id</td><td>String</td><td>"997814845" (ex.)</td></tr>
+              <tr><td>ticket_detail_type_id</td><td>Number</td><td>1, 14, 8, 3, 25 (ex.)</td></tr>
+              <tr><td>name</td><td>String</td><td>"Assunto", "Assunto ID", "IP", "Contato 1", "ID Site RA"</td></tr>
+              <tr><td>value</td><td>String</td><td>varia</td></tr>
+              <tr><td>code</td><td>null</td><td>null</td></tr>
+              <tr><td>creation_date</td><td>String (ISO 8601)</td><td>"2026-01-12T16:56:09.000Z"</td></tr>
+              <tr><td>privacy</td><td>Boolean</td><td>false</td></tr>
+              <tr><td>modification_date</td><td>null</td><td>null</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="meta">
+        <h2>3. meta</h2>
+        <div class="section-inner">
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>page</td><td>Object</td><td>Ver 3.1</td></tr>
+              <tr><td>total</td><td>Number</td><td>1</td></tr>
+            </tbody>
+          </table>
+          <h4>3.1. meta.page</h4>
+          <table>
+            <thead><tr><th>Nome do campo</th><th>Tipo de dados</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>number</td><td>Number</td><td>1</td></tr>
+              <tr><td>size</td><td>Number</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="resumo">
+        <h2>Resumo da hierarquia</h2>
+        <div class="section-inner hierarchy">
+          <pre>data (array)
+├── data[]
+│   ├── hugme_status { id, name }
+│   ├── ra_status { id, name }
+│   ├── favorable_assessment { id, description }
+│   ├── information_source { id, name }
+│   ├── source { id, name }
+│   ├── company { id, name, active }
+│   ├── last_feeling { id, name }
+│   ├── feed_type { id, name }
+│   ├── moderation { user {}, status, reason, request_date, response_date }
+│   ├── ra { replicas_count, source_id, source_name, ... }
+│   ├── customer { birthday[], cpf[], ..., city[], state[], ... }
+│   ├── user { id, name, assignment_date }
+│   ├── account { id, name }
+│   ├── rafone { expiration_date, status_id, status_name }
+│   ├── extra_data[]
+│   ├── id, _id, source_external_id, creation_date, ... (campos diretos)
+│   ├── historical[] { user {}, auto {}, id, creation_date, type {} }
+│   ├── interactions[] { ..., details[] { ... } }
+│   └── ...
+└── meta
+    ├── page { number, size }
+    └── total</pre>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Documentação API Ticket HugMe · ReclameAQUI
+  </footer>
+
+  <script>
+    (function() {
+      function initAnchors() {
+        var links = document.querySelectorAll('a[href^="#"]');
+        for (var i = 0; i < links.length; i++) {
+          links[i].addEventListener('click', function(ev) {
+            var href = this.getAttribute('href');
+            if (!href || href === '#') return;
+            var id = href.replace('#', '');
+            var target = document.getElementById(id);
+            if (target) {
+              ev.preventDefault();
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              try {
+                if (window.history && window.history.replaceState) {
+                  window.history.replaceState(null, '', href);
+                }
+              } catch (e) {}
+            }
+          });
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAnchors);
+      } else {
+        initAnchors();
+      }
+    })();
+  </script>
+  <script>(function(){var b=window.DOCS_BASE_URL||'';if(!b)return;b=b.replace(/\/?$/,'/');var l=document.querySelectorAll('a[href]');for(var i=0;i<l.length;i++){var a=l[i],h=(a.getAttribute('href')||'').trim();if(!h||h[0]==='#'||h.indexOf('http')===0)continue;a.href=b+h.replace(/^\//,'');a.setAttribute('target','_top');}})();</script>
+</body>
+</html>
