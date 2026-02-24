@@ -193,6 +193,15 @@
     .breadcrumb a { color: var(--ra-forest); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
     .breadcrumb [aria-current="page"] { color: var(--text); font-weight: 500; }
+    .doc-nav {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding: 0.75rem 1.5rem 0.5rem; margin: 0 auto;
+      max-width: 720px; font-size: 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-nav a { padding: 0.4rem 0.75rem; border-radius: 6px; color: var(--ra-forest); text-decoration: none; font-weight: 600; }
+    .doc-nav a:hover { background: var(--tabs-bg); }
+    .doc-nav a.current { background: var(--ra-forest); color: #fff; }
   </style>
 </head>
 <body>
@@ -206,10 +215,16 @@
 
   <nav class="breadcrumb" aria-label="Breadcrumb" style="max-width: 720px; margin: 0 auto; padding: 0.5rem 1.5rem 0;">
     <ol>
-      <li><a href="../index.html">Documentação</a></li>
-      <li><a href="index.html">Salesforce x Hugme</a></li>
+      <li><a href="index.html">Documentação</a></li>
       <li aria-current="page">Interface</li>
     </ol>
+  </nav>
+  <nav class="doc-nav" aria-label="Menu da documentação">
+    <a href="index.html">Documentação</a>
+    <a href="interface.html" class="current">Interface</a>
+    <a href="mapeamento-campos.html">Mapeamento de campos</a>
+    <a href="../api.html">Endpoints da API</a>
+    <a href="../ticket-response.html">Estrutura JSON – Ticket HugMe</a>
   </nav>
   <nav class="main-nav" aria-label="Navegação entre seções">
     <a href="#respostas">Respostas do ticket</a>
@@ -415,10 +430,7 @@
   </div>
 
   <footer class="page-footer">
-    <a href="index.html">Salesforce x Hugme</a> ·
-    <a href="mapeamento-campos.html">Mapeamento de campos</a> ·
-    <a href="../index.html">Documentação da API</a> ·
-    ReclameAQUI
+    Documentação Salesforce x Hugme · ReclameAQUI
   </footer>
 
   <script>

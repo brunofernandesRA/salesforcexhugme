@@ -94,6 +94,14 @@
     .breadcrumb a { color: var(--ra-forest); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
     .breadcrumb [aria-current="page"] { color: var(--text); font-weight: 500; }
+    .doc-nav {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding: 0.75rem 0 1rem; margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .doc-nav a { padding: 0.4rem 0.75rem; border-radius: 6px; color: var(--ra-forest); text-decoration: none; font-weight: 600; }
+    .doc-nav a:hover { background: var(--code-bg); }
+    .doc-nav a.current { background: var(--ra-forest); color: #fff; }
     footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.85rem; }
   </style>
 </head>
@@ -109,10 +117,16 @@
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol>
-        <li><a href="../index.html">Documentação</a></li>
-        <li><a href="index.html">Salesforce x Hugme</a></li>
+        <li><a href="index.html">Documentação</a></li>
         <li aria-current="page">Mapeamento de campos</li>
       </ol>
+    </nav>
+    <nav class="doc-nav" aria-label="Menu da documentação">
+      <a href="index.html">Documentação</a>
+      <a href="interface.html">Interface</a>
+      <a href="mapeamento-campos.html" class="current">Mapeamento de campos</a>
+      <a href="../api.html">Endpoints da API</a>
+      <a href="../ticket-response.html">Estrutura JSON – Ticket HugMe</a>
     </nav>
     <div class="intro">
       Este documento detalha o mapeamento entre os campos retornados pela API Hugme (ReclameAQUI) e os objetos e campos do Salesforce. A lógica de transformação está nas classes <strong>IntegrationProductHugMeDTO</strong> (estrutura de dados da API) e <strong>IntegrationProductHugMeDomain</strong> (criação/atualização de registros no Salesforce).
@@ -222,11 +236,6 @@
         </table>
       </div>
     </section>
-
-    <div class="link-blocks">
-      <a class="link-block" href="index.html">← Salesforce x Hugme</a>
-      <a class="link-block" href="../index.html">Documentação da API</a>
-    </div>
   </div>
 
   <footer>
