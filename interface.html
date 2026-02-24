@@ -45,9 +45,10 @@
     .page-header h1 { margin: 0; font-size: 1.15rem; font-weight: 600; }
     .page-header p { margin: 0.25rem 0 0; font-size: 0.85rem; opacity: 0.9; }
     .main-nav {
+      max-width: 900px;
+      margin: 0 auto 1rem;
+      padding: 0.75rem 2rem;
       background: var(--card);
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
       border-radius: 8px;
       border: 1px solid var(--border);
       display: flex;
@@ -64,7 +65,7 @@
       border-radius: 6px;
     }
     .main-nav a:hover { background: var(--tabs-bg); }
-    .container { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 2rem; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
     .section-block { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
     .section-block h2 {
       font-size: 1rem;
@@ -188,11 +189,11 @@
     .page-footer a:hover { text-decoration: underline; }
     .doc-nav {
       display: flex; flex-wrap: wrap; gap: 0.5rem;
-      padding: 0 1.5rem 0.75rem; margin: 0 auto;
-      max-width: 720px; font-size: 0.9rem;
+      padding: 0 2rem 0.75rem; margin: 0 auto;
+      max-width: 900px; font-size: 0.9rem;
       border-bottom: 1px solid var(--border);
     }
-    .breadcrumb { padding: 0.15rem 1.5rem 0.75rem; margin: 0 auto; max-width: 720px; font-size: 0.8rem; color: var(--text-muted); background: none; border: none; }
+    .breadcrumb { padding: 0.15rem 2rem 0.75rem; margin: 0 auto; max-width: 900px; font-size: 0.8rem; color: var(--text-muted); background: none; border: none; }
     .breadcrumb ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
     .breadcrumb li { display: inline-flex; align-items: center; gap: 0.35rem; }
     .breadcrumb li:not(:last-child)::after { content: "›"; color: var(--text-muted); font-weight: 300; opacity: 0.8; }
@@ -219,7 +220,7 @@
     <a href="mapeamento-campos.html">Mapeamento de campos</a>
     <a href="ticket-response.html">Estrutura JSON – Ticket HugMe</a>
   </nav>
-  <nav class="breadcrumb" aria-label="Breadcrumb" style="max-width: 720px; margin: 0 auto; padding: 0.15rem 1.5rem 0.75rem;">
+  <nav class="breadcrumb" aria-label="Breadcrumb" style="max-width: 900px; margin: 0 auto; padding: 0.15rem 2rem 0.75rem;">
     <ol>
       <li><a href="index.html">Documentação</a></li>
       <li aria-current="page">Interface</li>
