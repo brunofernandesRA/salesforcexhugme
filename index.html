@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salesforce x Integração Hugme – ReclameAQUI</title>
+  <style>
+    :root {
+      --ra-lime: #8CC63F;
+      --ra-forest: #00703C;
+      --ra-forest-dark: #004d2a;
+      --bg: #f8faf8;
+      --card: #fff;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --border: #e0e8e0;
+      --code-bg: #f0f5ee;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--ra-forest) 0%, var(--ra-forest-dark) 100%);
+      color: #fff;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 112, 60, 0.2);
+    }
+    .logo { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+    .logo .r { color: var(--ra-lime); }
+    .logo .a { color: #fff; }
+    .header h1 { margin: 0; font-size: 1.35rem; font-weight: 600; }
+    .header p { margin: 0.25rem 0 0; font-size: 0.9rem; opacity: 0.9; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .intro {
+      background: var(--card);
+      padding: 1.25rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border-left: 4px solid var(--ra-lime);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    section {
+      background: var(--card);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    section h2 {
+      margin: 0;
+      padding: 1rem 1.25rem;
+      font-size: 1.1rem;
+      background: linear-gradient(90deg, var(--ra-forest) 0%, transparent 100%);
+      color: #fff;
+      font-weight: 600;
+    }
+    .section-inner { padding: 1rem 1.25rem; }
+    .section-inner p { margin: 0 0 0.75rem; color: var(--text-muted); font-size: 0.95rem; }
+    .section-inner p:last-child { margin-bottom: 0; }
+    .section-inner ul { margin: 0 0 0.75rem; padding-left: 1.5rem; color: var(--text-muted); }
+    .section-inner li { margin-bottom: 0.35rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem; }
+    th, td { padding: 0.5rem 0.75rem; text-align: left; border: 1px solid var(--border); }
+    th { background: var(--ra-forest); color: #fff; font-weight: 600; }
+    code { background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85em; }
+    .link-blocks { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .link-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--code-bg);
+      border-radius: 8px;
+      border-left: 4px solid var(--ra-forest);
+      text-decoration: none;
+      color: var(--ra-forest);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: box-shadow 0.2s;
+    }
+    .link-block:hover { box-shadow: 0 2px 8px rgba(0, 112, 60, 0.15); }
+    .breadcrumb { padding: 0.5rem 0 0.75rem; font-size: 0.85rem; color: var(--text-muted); }
+    .breadcrumb ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
+    .breadcrumb li { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .breadcrumb li:not(:last-child)::after { content: "›"; color: var(--text-muted); font-weight: 300; }
+    .breadcrumb a { color: var(--ra-forest); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb [aria-current="page"] { color: var(--text); font-weight: 500; }
+    footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo"><span class="r">R</span><span class="a">A</span></div>
+    <div>
+      <h1>Salesforce x Integração Hugme</h1>
+      <p>ReclameAQUI · Documentação da integração</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../index.html">Documentação</a></li>
+        <li aria-current="page">Salesforce x Hugme</li>
+      </ol>
+    </nav>
+    <div class="intro">
+      Esta documentação descreve a integração entre <strong>Salesforce</strong> e o <strong>Hugme</strong> (plataforma ReclameAQUI), permitindo sincronizar tickets de reclamação, empresas e dados de atendimento entre os sistemas.
+    </div>
+
+    <section>
+      <h2>Visão geral</h2>
+      <div class="section-inner">
+        <p>A integração Salesforce x Hugme permite:</p>
+        <ul>
+          <li>Consultar e listar tickets de reclamação no Salesforce (via API Hugme).</li>
+          <li>Visualizar detalhes de tickets, empresas (companies) e reputação.</li>
+          <li>Utilizar os endpoints da API ReclameAQUI (Hugme) a partir de flows, Apex ou conectores no Salesforce.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Requisitos</h2>
+      <div class="section-inner">
+        <ul>
+          <li>Conta e credenciais de acesso à API ReclameAQUI (Hugme).</li>
+          <li>Salesforce (Sales Cloud ou Service Cloud) com permissão para configurar integrações (Callouts / Named Credentials ou Connected App).</li>
+          <li>URL base da API e endpoints documentados (ver links abaixo).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Configuração no Salesforce</h2>
+      <div class="section-inner">
+        <p><strong>1. Named Credential (recomendado)</strong></p>
+        <p>Crie uma Named Credential apontando para a URL base da API Hugme. Configure autenticação (por exemplo, OAuth ou usuário/senha) conforme fornecido pelo ReclameAQUI.</p>
+        <p><strong>2. Chamadas à API</strong></p>
+        <p>Use a Named Credential como host nas chamadas HTTP (Apex <code>HttpRequest</code> / <code>Http</code> ou Flow “Call external system”). Exemplo de endpoints:</p>
+        <table>
+          <thead>
+            <tr><th>Recurso</th><th>Descrição</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Retrieve all Tickets</td><td>Lista de tickets com filtros (ex.: data de modificação).</td></tr>
+            <tr><td>Retrieve Ticket by id</td><td>Detalhes de um ticket específico.</td></tr>
+            <tr><td>List Companies / Search Companies</td><td>Empresas e busca.</td></tr>
+            <tr><td>Retrieve Reputation</td><td>Dados de reputação.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Fluxo de dados (resumo)</h2>
+      <div class="section-inner">
+        <p>Salesforce → (HTTPS) → API ReclameAQUI (Hugme) → resposta JSON (tickets, companies, meta, etc.). A estrutura completa da resposta de tickets está documentada na página “Estrutura JSON – Ticket HugMe”.</p>
+      </div>
+    </section>
+
+    <div class="link-blocks">
+      <a class="link-block" href="interface.html">Interface – Telas do front (respostas, interações, reclamante, status, moderação)</a>
+      <a class="link-block" href="mapeamento-campos.html">Mapeamento de campos Hugme → Salesforce</a>
+      <a class="link-block" href="../index.html">Documentação da API</a>
+      <a class="link-block" href="../ticket-response.html">Estrutura JSON – Ticket HugMe (resposta da API)</a>
+    </div>
+  </div>
+
+  <footer>
+    Documentação Salesforce x Hugme · ReclameAQUI
+  </footer>
+</body>
+</html>

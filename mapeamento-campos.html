@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapeamento de campos – Hugme → Salesforce</title>
+  <style>
+    :root {
+      --ra-lime: #8CC63F;
+      --ra-forest: #00703C;
+      --ra-forest-dark: #004d2a;
+      --bg: #f8faf8;
+      --card: #fff;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --border: #e0e8e0;
+      --code-bg: #f0f5ee;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--ra-forest) 0%, var(--ra-forest-dark) 100%);
+      color: #fff;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 112, 60, 0.2);
+    }
+    .logo { font-size: 2rem; font-weight: 800; }
+    .logo .r { color: var(--ra-lime); }
+    .logo .a { color: #fff; }
+    .header h1 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+    .header p { margin: 0.25rem 0 0; font-size: 0.85rem; opacity: 0.9; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .intro {
+      background: var(--card);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--ra-lime);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    section {
+      background: var(--card);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    section h2 {
+      margin: 0;
+      padding: 0.75rem 1rem;
+      font-size: 1.05rem;
+      background: linear-gradient(90deg, var(--ra-forest) 0%, transparent 100%);
+      color: #fff;
+      font-weight: 600;
+    }
+    .section-inner { padding: 1rem 1.25rem; }
+    .section-inner p { margin: 0 0 0.5rem; color: var(--text-muted); font-size: 0.9rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th, td { padding: 0.5rem 0.65rem; text-align: left; border: 1px solid var(--border); }
+    th { background: var(--ra-forest); color: #fff; font-weight: 600; }
+    td:first-child { font-family: ui-monospace, monospace; color: var(--ra-forest); }
+    code { background: var(--code-bg); padding: 0.15rem 0.35rem; border-radius: 4px; font-size: 0.8em; }
+    .note { font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-top: 0.5rem; }
+    .link-blocks { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .link-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 0.9rem;
+      background: var(--code-bg);
+      border-radius: 8px;
+      border-left: 4px solid var(--ra-forest);
+      text-decoration: none;
+      color: var(--ra-forest);
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .link-block:hover { box-shadow: 0 2px 8px rgba(0, 112, 60, 0.15); }
+    .breadcrumb { padding: 0.5rem 0 0.75rem; font-size: 0.85rem; color: var(--text-muted); }
+    .breadcrumb ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
+    .breadcrumb li { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .breadcrumb li:not(:last-child)::after { content: "›"; color: var(--text-muted); font-weight: 300; }
+    .breadcrumb a { color: var(--ra-forest); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb [aria-current="page"] { color: var(--text); font-weight: 500; }
+    footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo"><span class="r">R</span><span class="a">A</span></div>
+    <div>
+      <h1>Mapeamento de campos – Hugme → Salesforce</h1>
+      <p>Base: IntegrationProductHugMeDTO e IntegrationProductHugMeDomain</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../index.html">Documentação</a></li>
+        <li><a href="index.html">Salesforce x Hugme</a></li>
+        <li aria-current="page">Mapeamento de campos</li>
+      </ol>
+    </nav>
+    <div class="intro">
+      Este documento detalha o mapeamento entre os campos retornados pela API Hugme (ReclameAQUI) e os objetos e campos do Salesforce. A lógica de transformação está nas classes <strong>IntegrationProductHugMeDTO</strong> (estrutura de dados da API) e <strong>IntegrationProductHugMeDomain</strong> (criação/atualização de registros no Salesforce).
+    </div>
+
+    <section>
+      <h2>1. Ticket (TicketBO) → Case</h2>
+      <div class="section-inner">
+        <p>Cada ticket da API é tratado como um <strong>Case</strong>. O Case é criado em <code>IntegrationProductHugMeDomain.createCase(TicketBO)</code> e atualizado em <code>getCaseByHugMeId</code> (status HugMe e RA).</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Campo Hugme (DTO / API)</th>
+              <th>Objeto / Campo Salesforce</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>TicketBO.id</code></td><td><code>Case.HugMe_Ticket_Id__c</code></td><td>Identificador do ticket no Hugme.</td></tr>
+            <tr><td><code>TicketBO.hugme_status.name</code></td><td><code>Case.Status_HugMe__c</code></td><td>Status no Hugme (ex.: "Novo"). Atualizado se o Case já existir.</td></tr>
+            <tr><td><code>TicketBO.ra_status.name</code></td><td><code>Case.Status_RA__c</code></td><td>Status no ReclameAQUI (ex.: "Não respondido"). Atualizado se o Case já existir.</td></tr>
+            <tr><td><code>TicketBO.creation_date</code></td><td><code>Case.Data_de_Criacao_Hugme__c</code></td><td>Data de criação do ticket no Hugme.</td></tr>
+            <tr><td><code>TicketBO.last_modification_date</code></td><td><code>Case.Ultima_Modificacao_Hugme__c</code></td><td>Última modificação do ticket no Hugme.</td></tr>
+            <tr><td><code>TicketBO.interactions[0].message</code></td><td><code>Case.Manifestacao_Reclame_Aqui__c</code></td><td>Mensagem da primeira interação (manifestação).</td></tr>
+            <tr><td><code>TicketBO.interactions[0].message</code> ou texto padrão</td><td><code>Case.Description</code></td><td>Descrição do caso; fallback: "Ticket criado a partir da HugMe".</td></tr>
+            <tr><td>—</td><td><code>Case.Subject</code></td><td>Fixado: <code>"Ticket HugMe #" + ticket.id</code>.</td></tr>
+            <tr><td>—</td><td><code>Case.Status</code></td><td>Fixado: "New".</td></tr>
+            <tr><td>—</td><td><code>Case.Origin</code></td><td>Fixado: "Reclame Aqui".</td></tr>
+            <tr><td>—</td><td><code>Case.Priority</code></td><td>Fixado: "Medium".</td></tr>
+            <tr><td><code>TicketBO.customer</code> (objeto criado)</td><td><code>Case.Cliente__c</code></td><td>Lookup para <code>ClientsHugmeIntegration__c</code> (ver seção 2).</td></tr>
+            <tr><td>—</td><td><code>Case.RecordTypeId</code></td><td>Record Type com DeveloperName <code>RA_da_Ra</code>.</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Campos do TicketBO não mapeados para Case: <code>active</code>, <code>historical</code> (array). O array <code>interactions</code> é usado também para criar registros em Interacao_Ticket_Hugme__c (seção 3).</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Customer (CustomerBO) → ClientsHugmeIntegration__c</h2>
+      <div class="section-inner">
+        <p>O consumidor do ticket é criado como <strong>ClientsHugmeIntegration__c</strong> em <code>IntegrationProductHugMeDomain.createCliente(CustomerBO)</code> e associado ao Case via <code>Case.Cliente__c</code>.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Campo Hugme (DTO / API)</th>
+              <th>Campo Salesforce</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>CustomerBO.name</code></td><td><code>ClientsHugmeIntegration__c.Name</code></td><td>Nome do cliente.</td></tr>
+            <tr><td><code>CustomerBO.email[0]</code></td><td><code>ClientsHugmeIntegration__c.Email__c</code></td><td>Primeiro e-mail do array.</td></tr>
+            <tr><td><code>CustomerBO.phone_numbers[0]</code></td><td><code>ClientsHugmeIntegration__c.Telefone__c</code></td><td>Primeiro número do array.</td></tr>
+            <tr><td><code>CustomerBO.birthday[0]</code></td><td><code>ClientsHugmeIntegration__c.Data_de_Aniversario__c</code></td><td>Convertido via <code>IntegrationProductHugMeUtils.returnDate()</code>.</td></tr>
+            <tr><td><code>CustomerBO.city[0].name</code></td><td><code>ClientsHugmeIntegration__c.Cidade__c</code></td><td>Nome da cidade (primeiro elemento do array).</td></tr>
+            <tr><td><code>CustomerBO.state[0].fs</code></td><td><code>ClientsHugmeIntegration__c.Estado__c</code></td><td>Sigla do estado (ex.: "SP").</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Campos do CustomerBO não mapeados neste fluxo: <code>id</code>, <code>duplicate_id</code>, <code>socialName</code>, <code>cpf</code>, <code>rg</code>, <code>gender</code>, <code>photo</code>, <code>cnpj</code>, <code>company_name</code>, <code>type</code>, <code>tags</code>, <code>pending_tickets_count</code>, <code>city[].id</code>, <code>state[].id</code>, <code>state[].name</code>.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Interaction (InteractionBO) → Interacao_Ticket_Hugme__c</h2>
+      <div class="section-inner">
+        <p>Cada interação do ticket vira um registro de <strong>Interacao_Ticket_Hugme__c</strong> (comentário), criado em <code>IntegrationProductHugMeDomain.createComment(...)</code>. Só são inseridas interações que ainda não existem (por <code>ticket_interaction_id</code>) e que possuem <code>message</code> e <code>creation_date</code>.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Campo Hugme (DTO / API)</th>
+              <th>Campo Salesforce</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Case.Id</code> (do Case do ticket)</td><td><code>Interacao_Ticket_Hugme__c.Ticket__c</code></td><td>Lookup para o Case.</td></tr>
+            <tr><td><code>InteractionBO.ticket_interaction_id</code></td><td><code>Interacao_Ticket_Hugme__c.Ticket_Interaction_ID__c</code></td><td>Identificador único da interação no Hugme (evita duplicatas).</td></tr>
+            <tr><td><code>InteractionBO.creation_date</code></td><td><code>Interacao_Ticket_Hugme__c.Creation_Date__c</code></td><td>Ajuste de fuso: <code>creation_date.addHours(-3)</code> na criação do comentário; ao persistir, <code>addHours(3)</code>.</td></tr>
+            <tr><td><code>InteractionBO.message</code></td><td><code>Interacao_Ticket_Hugme__c.Mensagem__c</code></td><td>Conteúdo da mensagem.</td></tr>
+            <tr><td><code>InteractionBO.ticket_interaction_name</code></td><td><code>Interacao_Ticket_Hugme__c.Ticket_Interaction_Name__c</code></td><td>Nome do tipo de interação (ex.: "Manifestação").</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Campos do InteractionBO não mapeados para Interacao_Ticket_Hugme__c: <code>ticket_interaction_type_id</code>, <code>customer_id</code>, <code>responsible_id</code>, <code>responsible_name</code>, <code>privacy</code>, <code>modification_date</code>, <code>delivered</code>, <code>readed</code>, <code>visualized</code>, <code>video</code>, <code>picture</code>, <code>details</code>. O objeto possui também <code>Visualized__c</code> no Salesforce (não preenchido por este fluxo).</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Resposta da API (TicketResponseBO) e outros DTOs</h2>
+      <div class="section-inner">
+        <p>Estruturas usadas na integração que não possuem mapeamento direto para objetos customizados:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Classe DTO</th>
+              <th>Uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>TicketResponseBO</code></td><td>Envelope da API: <code>data</code> (lista de TicketBO) e <code>meta</code> (paginação).</td></tr>
+            <tr><td><code>MetaBO</code> / <code>PageBO</code></td><td>Controle de paginação; não persistido no Salesforce.</td></tr>
+            <tr><td><code>HistoricalBO</code> / <code>TypeInfoBO</code></td><td>Presentes em <code>TicketBO.historical</code>; não mapeados para objetos SF.</td></tr>
+            <tr><td><code>InteractionDetailBO</code></td><td>Detalhes da interação (<code>interaction.details</code>); não mapeados.</td></tr>
+            <tr><td><code>StatusHugmeBO</code> / <code>StatusRaBO</code></td><td>Fornecem <code>id</code> e <code>name</code>; no Case só é usado o <code>name</code>.</td></tr>
+            <tr><td><code>HugmeInteractionResponse</code></td><td>Resposta ao criar interação/moderação na API; usado para criar comentário no SF (<code>createComment(response, caseId, message)</code>).</td></tr>
+            <tr><td><code>PicklistOptionBO</code></td><td>Opções de empresa (search companies); exibição em LWC, não persistido como objeto.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="link-blocks">
+      <a class="link-block" href="index.html">← Salesforce x Hugme</a>
+      <a class="link-block" href="../index.html">Documentação da API</a>
+    </div>
+  </div>
+
+  <footer>
+    Mapeamento Hugme → Salesforce · ReclameAQUI
+  </footer>
+</body>
+</html>
