@@ -45,9 +45,8 @@
     .page-header h1 { margin: 0; font-size: 1.15rem; font-weight: 600; }
     .page-header p { margin: 0.25rem 0 0; font-size: 0.85rem; opacity: 0.9; }
     .main-nav {
-      max-width: 900px;
-      margin: 0 auto 1.5rem;
-      padding: 0.5rem 2rem 0.75rem;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 0 0.75rem;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
@@ -187,11 +186,11 @@
     .page-footer a:hover { text-decoration: underline; }
     .doc-nav {
       display: flex; flex-wrap: wrap; gap: 0.5rem;
-      padding: 0 2rem 0.75rem; margin: 0 auto;
-      max-width: 900px; font-size: 0.9rem;
+      padding: 0 0 0.75rem; margin-bottom: 0.25rem;
       border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
     }
-    .breadcrumb { padding: 0.15rem 2rem 0.75rem; margin: 0 auto; max-width: 900px; font-size: 0.8rem; color: var(--text-muted); background: none; border: none; }
+    .breadcrumb { padding: 0.15rem 0 0.75rem; font-size: 0.8rem; color: var(--text-muted); background: none; border: none; }
     .breadcrumb ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
     .breadcrumb li { display: inline-flex; align-items: center; gap: 0.35rem; }
     .breadcrumb li:not(:last-child)::after { content: "›"; color: var(--text-muted); font-weight: 300; opacity: 0.8; }
@@ -212,27 +211,27 @@
     </div>
   </header>
 
-  <nav class="doc-nav" aria-label="Menu da documentação">
-    <a href="index.html">Documentação</a>
-    <a href="interface.html" class="current">Interface</a>
-    <a href="mapeamento-campos.html">Mapeamento de campos</a>
-    <a href="ticket-response.html">Estrutura JSON – Ticket HugMe</a>
-  </nav>
-  <nav class="breadcrumb" aria-label="Breadcrumb" style="max-width: 900px; margin: 0 auto; padding: 0.15rem 2rem 0.75rem;">
-    <ol>
-      <li><a href="index.html">Documentação</a></li>
-      <li aria-current="page">Interface</li>
-    </ol>
-  </nav>
-  <nav class="main-nav" aria-label="Navegação entre seções">
-    <a href="#respostas">Respostas do ticket</a>
-    <a href="#interacoes">Interações</a>
-    <a href="#reclamante">Reclamante</a>
-    <a href="#status-empresa">Status da empresa</a>
-    <a href="#resposta-moderation">Resposta e Moderação</a>
-  </nav>
-
   <div class="container">
+    <nav class="doc-nav" aria-label="Menu da documentação">
+      <a href="index.html">Documentação</a>
+      <a href="interface.html" class="current">Interface</a>
+      <a href="mapeamento-campos.html">Mapeamento de campos</a>
+      <a href="ticket-response.html">Estrutura JSON – Ticket HugMe</a>
+    </nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="index.html">Documentação</a></li>
+        <li aria-current="page">Interface</li>
+      </ol>
+    </nav>
+    <nav class="main-nav" aria-label="Navegação entre seções">
+      <a href="#respostas">Respostas do ticket</a>
+      <a href="#interacoes">Interações</a>
+      <a href="#reclamante">Reclamante</a>
+      <a href="#status-empresa">Status da empresa</a>
+      <a href="#resposta-moderation">Resposta e Moderação</a>
+    </nav>
+
     <!-- 1. Respostas do ticket -->
     <section class="section-block" id="respostas">
       <h2>Respostas do ticket</h2>
