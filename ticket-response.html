@@ -74,7 +74,7 @@
       .container { grid-template-columns: 1fr; }
     }
 
-    nav {
+    .nav-toc {
       position: sticky;
       top: 2rem;
       height: fit-content;
@@ -85,7 +85,7 @@
       border-left: 4px solid var(--ra-lime);
     }
 
-    nav h3 {
+    .nav-toc h3 {
       margin: 0 0 0.75rem;
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -93,15 +93,15 @@
       color: var(--ra-forest);
     }
 
-    nav ul {
+    .nav-toc ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
 
-    nav li { margin: 0.25rem 0; }
+    .nav-toc li { margin: 0.25rem 0; }
 
-    nav a {
+    .nav-toc a {
       display: block;
       padding: 0.35rem 0.5rem;
       color: var(--text);
@@ -110,7 +110,7 @@
       border-radius: 4px;
     }
 
-    nav a:hover {
+    .nav-toc a:hover {
       background: var(--code-bg);
       color: var(--ra-forest);
     }
@@ -244,7 +244,7 @@
     .doc-nav a { padding: 0.4rem 0.75rem; border-radius: 6px; color: var(--ra-forest); text-decoration: none; font-weight: 600; }
     .doc-nav a:hover { background: var(--code-bg); }
     .doc-nav a.current { background: var(--ra-forest); color: #fff; }
-    .breadcrumb { grid-column: 1 / -1; padding: 0.15rem 0 0.75rem; font-size: 0.8rem; color: var(--text-muted); background: none; border: none; }
+    .breadcrumb { grid-column: 1 / -1; padding: 0.15rem 0 0.75rem; margin: 0; font-size: 0.8rem; color: var(--text-muted); background: none !important; border: none !important; box-shadow: none !important; border-radius: 0; }
     .breadcrumb ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
     .breadcrumb li { display: inline-flex; align-items: center; gap: 0.35rem; }
     .breadcrumb li:not(:last-child)::after { content: "›"; color: var(--text-muted); font-weight: 300; opacity: 0.8; }
@@ -283,7 +283,7 @@
         <li aria-current="page">Estrutura JSON – Ticket HugMe</li>
       </ol>
     </nav>
-    <nav>
+    <nav class="nav-toc" aria-label="Índice da página">
       <h3>Navegação</h3>
       <ul>
         <li><a href="#raiz">1. Raiz</a></li>
