@@ -89,22 +89,22 @@
       transition: box-shadow 0.2s;
     }
     .link-block:hover { box-shadow: 0 2px 8px rgba(0, 112, 60, 0.15); }
-    .breadcrumb { padding: 0.5rem 0 0.75rem; font-size: 0.85rem; color: var(--text-muted); }
-    .breadcrumb ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
-    .breadcrumb li { display: inline-flex; align-items: center; gap: 0.35rem; }
-    .breadcrumb li:not(:last-child)::after { content: "›"; color: var(--text-muted); font-weight: 300; }
-    .breadcrumb a { color: var(--ra-forest); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb [aria-current="page"] { color: var(--text); font-weight: 500; }
     .doc-nav {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      padding: 0.75rem 0 1rem;
-      margin-bottom: 0.5rem;
+      padding: 0 0 0.75rem;
+      margin-bottom: 0.25rem;
       border-bottom: 1px solid var(--border);
       font-size: 0.9rem;
     }
+    .breadcrumb { padding: 0.15rem 0 0.75rem; font-size: 0.8rem; color: var(--text-muted); background: none; border: none; }
+    .breadcrumb ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
+    .breadcrumb li { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .breadcrumb li:not(:last-child)::after { content: "›"; color: var(--text-muted); font-weight: 300; opacity: 0.8; }
+    .breadcrumb a { color: var(--ra-forest); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb [aria-current="page"] { color: var(--text-muted); font-weight: 500; }
     .doc-nav a {
       padding: 0.4rem 0.75rem;
       border-radius: 6px;
@@ -127,16 +127,16 @@
   </header>
 
   <div class="container">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <ol>
-        <li aria-current="page">Documentação</li>
-      </ol>
-    </nav>
     <nav class="doc-nav" aria-label="Menu da documentação">
       <a href="index.html" class="current">Documentação</a>
       <a href="interface.html">Interface</a>
       <a href="mapeamento-campos.html">Mapeamento de campos</a>
       <a href="ticket-response.html">Estrutura JSON – Ticket HugMe</a>
+    </nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li aria-current="page">Documentação</li>
+      </ol>
     </nav>
     <div class="intro">
       Esta documentação descreve a integração entre <strong>Salesforce</strong> e o <strong>Hugme</strong> (plataforma ReclameAQUI), permitindo sincronizar tickets de reclamação, empresas e dados de atendimento entre os sistemas.
